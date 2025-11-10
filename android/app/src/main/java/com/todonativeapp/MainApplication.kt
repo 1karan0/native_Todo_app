@@ -1,4 +1,4 @@
-package com.todonativeapp
+package com.stockmanager
 
 import android.app.Application
 import com.facebook.react.PackageList

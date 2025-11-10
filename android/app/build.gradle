@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.todonativeapp"
+    namespace "com.stockmanager"
     defaultConfig {
-        applicationId "com.todonativeapp"
+        applicationId "com.stockmanager"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -116,4 +116,22 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+      // Import the Firebase BoM (ensures all Firebase libs use compatible versions)
+  implementation platform('com.google.firebase:firebase-bom:34.5.0')
+
+  // Add any Firebase services you want
+  implementation 'com.google.firebase:firebase-analytics'
+  implementation 'com.google.firebase:firebase-auth'
 }
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Add this line
+        classpath 'com.google.gms:google-services:4.4.4'
+    }
+}
+apply plugin: 'com.google.gms.google-services'
+

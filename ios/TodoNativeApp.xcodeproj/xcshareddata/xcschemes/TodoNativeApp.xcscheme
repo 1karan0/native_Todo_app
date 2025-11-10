@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "TodoNativeApp.app"
-               BlueprintName = "TodoNativeApp"
-               ReferencedContainer = "container:TodoNativeApp.xcodeproj">
+               BuildableName = "stockmanager.app"
+               BlueprintName = "stockmanager"
+               ReferencedContainer = "container:stockmanager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TodoNativeAppTests.xctest"
-               BlueprintName = "TodoNativeAppTests"
-               ReferencedContainer = "container:TodoNativeApp.xcodeproj">
+               BuildableName = "stockmanagerTests.xctest"
+               BlueprintName = "stockmanagerTests"
+               ReferencedContainer = "container:stockmanager.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TodoNativeApp.app"
-            BlueprintName = "TodoNativeApp"
-            ReferencedContainer = "container:TodoNativeApp.xcodeproj">
+            BuildableName = "stockmanager.app"
+            BlueprintName = "stockmanager"
+            ReferencedContainer = "container:stockmanager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "TodoNativeApp.app"
-            BlueprintName = "TodoNativeApp"
-            ReferencedContainer = "container:TodoNativeApp.xcodeproj">
+            BuildableName = "stockmanager.app"
+            BlueprintName = "stockmanager"
+            ReferencedContainer = "container:stockmanager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
