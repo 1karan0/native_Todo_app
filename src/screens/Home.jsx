@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import AllItems from './AllItems'
 import CreateItems from './CreateItems'
+import { SafeAreaView } from 'react-native-safe-area-context'
  
 
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
     {id: 5,name: "potato",stock: 5,unit: "kg"}
 ])
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Dashboard</Text>
             <View style={styles.buttonContainer}>
                 <Pressable style={[styles.button, view === 0 ? { backgroundColor: '#1dd332b0' } : null]} onPress={() => setview(0)}>
@@ -30,7 +31,7 @@ const Home = () => {
             {view === 0 && <AllItems data={data} />}
             {view === 1 && <AllItems data={data.filter((item) => item.stock < 10)} />}
             {view === 2 && <CreateItems data={data} setdata={setdata}/>}
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        padding: '4%',
+        padding: '15%',
         backgroundColor: 'white'
     },
     title: {
