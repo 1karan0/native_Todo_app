@@ -5,10 +5,17 @@ import HeroPage from './src/screens/HeroPage';
 import Home from './src/screens/Home';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
+import RNBootSplash from 'react-native-bootsplash';
+
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+React.useEffect(() => {
+    RNBootSplash.hide({ fade: true }); // hide splash once app loads
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
