@@ -1,5 +1,6 @@
-import { firebase } from '@react-native-firebase/app';
-import '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -10,8 +11,5 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
 
-export { firebase };
+export { firestore, auth };

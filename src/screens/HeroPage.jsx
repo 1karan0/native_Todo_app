@@ -8,7 +8,7 @@ import {
   Easing,
 } from 'react-native';
 import React, { useRef, useEffect, use } from 'react';
-import { firebase } from '../firebaseConfig';
+import { firebase,auth } from '../firebaseConfig';
 
 const HeroPage = ({ navigation }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -39,7 +39,7 @@ const HeroPage = ({ navigation }) => {
       ]),
     ]).start();
   }, []);
-  const user = firebase.auth().currentUser;
+  const user = auth().currentUser;
 
 
   return (
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-end',
     position: 'absolute',
-    top: -80,
+    top: -150,
     right: 25,
   },
   loginbtn: {

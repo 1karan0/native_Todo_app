@@ -11,16 +11,12 @@ import AllItems from './AllItems';
 import CreateItems from './CreateItems';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { firebase } from '../firebaseConfig';
+import { firestore, auth } from "../firebaseConfig";
 
-const Home = ({navigation}) => {
+
+const Home = ({ navigation }) => {
     const [view, setview] = useState(0);
-    const [data, setdata] = useState([
-        { id: 1, name: 'Wheat', stock: 5, unit: 'kg' },
-        { id: 2, name: 'Rice', stock: 10, unit: 'kg' },
-        { id: 3, name: 'Black Rice', stock: 5, unit: 'kg' },
-        { id: 4, name: 'Corn', stock: 12, unit: 'kg' },
-        { id: 5, name: 'Potato', stock: 5, unit: 'kg' },
-    ]);
+    const [data, setdata] = useState([]);
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -32,6 +28,25 @@ const Home = ({navigation}) => {
             useNativeDriver: true,
         }).start();
     }, []);
+
+  useEffect(() => {
+  const userId = auth().currentUser.uid;
+
+  const unsubscribe = firestore()
+    .collection("items")
+    .where("userId", "==", userId)
+    .onSnapshot(querySnapshot => {
+      const items = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setdata(items);
+    });
+
+  return () => unsubscribe();
+}, []);
+
+
 
     const switchView = (val) => {
         setview(val);
@@ -50,7 +65,7 @@ const Home = ({navigation}) => {
     };
     const handleLogout = async () => {
         try {
-            await firebase.auth().signOut();
+            await auth().signOut();
             navigation.replace('Home');
         } catch (error) {
             console.error('Logout error:', error.message);
@@ -73,25 +88,30 @@ const Home = ({navigation}) => {
                     ],
                 }}
             >
-                <View style={{ alignItems: 'flex-end', marginBottom: 20 }}>
-                    <Pressable
-                        onPress={handleLogout}
-                        style={{
-                            borderColor: '#24b04b',
-                            borderWidth: 1,
-                            paddingHorizontal: 14,
-                            paddingVertical: 6,
-                            borderRadius: 20,
-                            backgroundColor: 'white',
-                        }}
-                    >
-                        <Text style={{ color: '#24b04b', fontWeight: '600' }}>Logout</Text>
-                    </Pressable>
+                <View style={styles.header}>
+                    <View style={{ width: '70%' }}>
+                        <Text style={styles.title}>Dashboard</Text>
+                        <Text style={styles.subtitle}>
+                            Manage your stock, track inventory, and stay updated.
+                        </Text>
+                    </View>
+                    <View>
+                        <Pressable
+                            onPress={handleLogout}
+                            style={{
+                                borderColor: '#24b04b',
+                                borderWidth: 1,
+                                paddingHorizontal: 14,
+                                paddingVertical: 6,
+                                borderRadius: 20,
+                                backgroundColor: 'white',
+                            }}
+                        >
+                            <Text style={{ color: '#24b04b', fontWeight: '600' }}>Logout</Text>
+                        </Pressable>
+                    </View>
                 </View>
-                <Text style={styles.title}>Dashboard</Text>
-                <Text style={styles.subtitle}>
-                    Manage your stock, track inventory, and stay updated.
-                </Text>
+
 
                 <View style={styles.buttonContainer}>
                     <Pressable
@@ -150,10 +170,10 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: '700',
         color: '#1b1b1b',
-        marginBottom: 5,
+
     },
     subtitle: {
-        fontSize: 15,
+        fontSize: 12,
         color: '#777',
         marginBottom: 20,
     },
@@ -181,4 +201,9 @@ const styles = StyleSheet.create({
     activeButtonText: {
         color: 'white',
     },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'start',
+    }
 });

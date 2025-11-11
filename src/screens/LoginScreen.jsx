@@ -5,24 +5,20 @@ import { signIn, signUp } from '../services/authService';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSignIn = async () => {
         try {
+            setLoading(true);
             await signIn(email, password);
+            setLoading(false);
             navigation.replace('Dashboard');
         } catch (error) {
+            setLoading(false);
             Alert.alert('Error', error.message);
         }
     };
 
-    const handleSignUp = async () => {
-        try {
-            await signUp(email, password);
-            navigation.replace('Dashboard');
-        } catch (error) {
-            Alert.alert('Error', error.message);
-        }
-    };
 
     return (
         <View style={styles.container}>
@@ -44,11 +40,12 @@ const LoginScreen = ({ navigation }) => {
             />
 
             <Pressable style={styles.btn} onPress={handleSignIn}>
-                <Text style={styles.btnText}>Sign In</Text>
+                <Text style={styles.btnText}>{loading ?"Signing in...":"Sign In"}</Text>
             </Pressable>
 
-            <Pressable style={[styles.btn, { backgroundColor: '#24b04b' }]} onPress={handleSignUp}>
-                <Text style={styles.btnText}>Sign Up</Text>
+            <Text>dont have an account then first</Text>
+            <Pressable style={[{ }]} onPress={()=> navigation.navigate("Signup")}>
+                <Text style={{color:"green" }}> signUp </Text>
             </Pressable>
         </View>
     );

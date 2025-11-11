@@ -22,6 +22,7 @@ export default function SignupScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#888"
         value={email}
         onChangeText={setEmail}
       />
@@ -29,6 +30,7 @@ export default function SignupScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#888"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -42,9 +44,33 @@ export default function SignupScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
-  input: { width: '80%', borderWidth: 1, borderRadius: 8, marginBottom: 15, padding: 10 },
-  button: { backgroundColor: '#24b04b', padding: 12, borderRadius: 30 },
-  btnText: { color: '#fff', fontWeight: '600' },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20
+  },
+  input: {
+    width: '80%',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 15,
+    padding: 10,
+    color: "#000"
+  },
+  button: {
+    backgroundColor: '#24b04b',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  btnText: {
+    color: '#fff',
+    fontWeight: '600'
+  },
 });
