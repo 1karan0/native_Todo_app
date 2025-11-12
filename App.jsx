@@ -6,6 +6,7 @@ import Home from './src/screens/Home';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import RNBootSplash from 'react-native-bootsplash';
+import "./global.css"
 
 
 const Stack = createNativeStackNavigator();

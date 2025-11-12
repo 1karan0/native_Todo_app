@@ -8,7 +8,7 @@ import {
   Easing,
 } from 'react-native';
 import React, { useRef, useEffect, use } from 'react';
-import { firebase,auth } from '../firebaseConfig';
+import { auth } from '../firebaseConfig';
 
 const HeroPage = ({ navigation }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;

@@ -1,85 +1,67 @@
 import React, { useState } from 'react';
-import { View, TextInput, Pressable, Text, StyleSheet, Alert } from 'react-native';
-import { signIn, signUp } from '../services/authService';
+import { View, TextInput, Pressable, Text, Alert } from 'react-native';
+import { signIn } from '../services/authService';
 
 const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-    const handleSignIn = async () => {
-        try {
-            setLoading(true);
-            await signIn(email, password);
-            setLoading(false);
-            navigation.replace('Dashboard');
-        } catch (error) {
-            setLoading(false);
-            Alert.alert('Error', error.message);
-        }
-    };
+  const handleSignIn = async () => {
+    try {
+      setLoading(true);
+      await signIn(email, password);
+      setLoading(false);
+      navigation.replace('Dashboard');
+    } catch (error) {
+      setLoading(false);
+      Alert.alert('Error', error.message);
+    }
+  };
 
+  return (
+    <View className="flex-1 justify-center items-center bg-gradient-to-b from-emerald-100 to-white px-6">
+      <Text className="text-3xl font-bold text-emerald-700 mb-8">Welcome Back</Text>
 
-    return (
-        <View style={styles.container}>
-            <TextInput
-                placeholder="Email"
-                placeholderTextColor="#888"
-                value={email}
-                onChangeText={setEmail}
-                style={styles.input}
-                keyboardType="email-address"
-            />
-            <TextInput
-                placeholder="Password"
-                placeholderTextColor="#888"
-                value={password}
-                onChangeText={setPassword}
-                style={styles.input}
-                secureTextEntry
-            />
+      <View className="w-full max-w-sm">
+        <TextInput
+          placeholder="Email"
+          placeholderTextColor="#777"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          className="w-full border border-gray-300 bg-white rounded-xl px-4 py-3 mb-4 text-gray-800 shadow-sm"
+        />
 
-            <Pressable style={styles.btn} onPress={handleSignIn}>
-                <Text style={styles.btnText}>{loading ?"Signing in...":"Sign In"}</Text>
-            </Pressable>
+        <TextInput
+          placeholder="Password"
+          placeholderTextColor="#777"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          className="w-full border border-gray-300 bg-white rounded-xl px-4 py-3 mb-6 text-gray-800 shadow-sm"
+        />
 
-            <Text>dont have an account then first</Text>
-            <Pressable style={[{ }]} onPress={()=> navigation.navigate("Signup")}>
-                <Text style={{color:"green" }}> signUp </Text>
-            </Pressable>
+        <Pressable
+          onPress={handleSignIn}
+          className={`w-full rounded-xl py-3 ${
+            loading ? 'bg-emerald-300' : 'bg-emerald-600'
+          }`}
+        >
+          <Text className="text-white text-center text-base font-semibold">
+            {loading ? 'Signing in...' : 'Sign In'}
+          </Text>
+        </Pressable>
+
+        <View className="flex-row justify-center mt-6">
+          <Text className="text-gray-600">Don't have an account?</Text>
+          <Pressable onPress={() => navigation.navigate('Signup')}>
+            <Text className="text-emerald-600 font-semibold ml-1">Sign Up</Text>
+          </Pressable>
         </View>
-    );
+      </View>
+    </View>
+  );
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        paddingHorizontal: 30,
-    },
-    input: {
-        width: '100%',
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 8,
-        padding: 12,
-        marginBottom: 15,
-        color: '#000',
-    },
-    btn: {
-        backgroundColor: '#222',
-        paddingVertical: 12,
-        paddingHorizontal: 40,
-        borderRadius: 8,
-        marginBottom: 10,
-    },
-    btnText: {
-        color: 'white',
-        fontWeight: '600',
-        fontSize: 16,
-    },
-});

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable } from 'react-native';
 import { firebase } from '../firebaseConfig';
 
 export default function SignupScreen({ navigation }) {
@@ -16,61 +16,41 @@ export default function SignupScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create Account</Text>
+    <View className="flex-1 justify-center items-center bg-gradient-to-b from-emerald-100 to-white px-6">
+      <Text className="text-3xl font-bold text-emerald-700 mb-8">Create Account</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#888"
-        value={email}
-        onChangeText={setEmail}
-      />
+      <View className="w-full max-w-sm">
+        <TextInput
+          placeholder="Email"
+          placeholderTextColor="#777"
+          value={email}
+          onChangeText={setEmail}
+          className="w-full border border-gray-300 bg-white rounded-xl px-4 py-3 mb-4 text-gray-800 shadow-sm"
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#888"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+        <TextInput
+          placeholder="Password"
+          placeholderTextColor="#777"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          className="w-full border border-gray-300 bg-white rounded-xl px-4 py-3 mb-6 text-gray-800 shadow-sm"
+        />
 
-      <Pressable style={styles.button} onPress={handleSignup}>
-        <Text style={styles.btnText}>Sign Up</Text>
-      </Pressable>
+        <Pressable
+          onPress={handleSignup}
+          className="w-full bg-emerald-600 rounded-xl py-3"
+        >
+          <Text className="text-white text-center text-base font-semibold">Sign Up</Text>
+        </Pressable>
+
+        <View className="flex-row justify-center mt-6">
+          <Text className="text-gray-600">Already have an account?</Text>
+          <Pressable onPress={() => navigation.navigate('Login')}>
+            <Text className="text-emerald-600 font-semibold ml-1">Sign In</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20
-  },
-  input: {
-    width: '80%',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 15,
-    padding: 10,
-    color: "#000"
-  },
-  button: {
-    backgroundColor: '#24b04b',
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  btnText: {
-    color: '#fff',
-    fontWeight: '600'
-  },
-});
